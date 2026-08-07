@@ -16,6 +16,8 @@ The code is designed for applications such as:
 
 An example of the generated Abaqus geometry is shown below:
 
+![Generated Abaqus Model](images/generated_model.png)
+
 # Features
 
 * Automatic generation of randomly positioned fibers in 3D

@@ -14,6 +14,7 @@ def generate_model(config, fiber_data):
             Information about fibers: center coordinates,
             Euler angles, and fiber end point coordinates.
     """
+
     # Extract parameters from the config dictionary
     BOX_W, BOX_H, BOX_D = config["BOX_DIMS"]
 
@@ -62,16 +63,21 @@ def generate_model(config, fiber_data):
         type=DEFORMABLE_BODY
     )
 
-    for _, _, points in fiber_data:
+    # Collect all wire segments
+    wire_points = []
 
-        fiber_part.WirePolyLine(
-            points=(
-                tuple(points[0]),
-                tuple(points[1])
-            ),
-            mergeType=IMPRINT,
-            meshable=ON
-        )
+    for _, _, points in fiber_data:
+        wire_points.append((
+            tuple(points[0]),
+            tuple(points[1])
+        ))
+
+    # Create all wires in a single feature
+    fiber_part.WirePolyLine(
+        points=tuple(wire_points),
+        mergeType=SEPARATE,
+        meshable=ON
+    )
 
     # Add fiber instance to the assembly
     assembly.Instance(

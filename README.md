@@ -16,8 +16,6 @@ The code is designed for applications such as:
 
 An example of the generated Abaqus geometry is shown below:
 
-![Generated Abaqus Model](images/generated_model.png)
-
 # Features
 
 * Automatic generation of randomly positioned fibers in 3D
@@ -224,6 +222,10 @@ Implemented in:
 ```
 generate_model.py
 ```
+
+For computational efficiency, all fiber segments are passed to Abaqus through a single `WirePolyLine` operation rather than creating individual wire features for each fiber.
+
+This approach significantly reduces Abaqus geometry generation time and allows large numbers of randomly generated fibers to be created efficiently.
 
 # Workflow
 
